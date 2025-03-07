@@ -7,34 +7,17 @@
         <div class="site-container">
             <div class="top-container">
                 <div class="navbar">
-                    <img src="/static/images/blogtest.jpg">
                     <div class="navbar-tab-container">
-                        
-                       
-
-                        <form class = "link" method="POST" action="/submit">
-                            {{form.csrf_token}}
-                            <div>
-                                <label for="user_email">Email Address:</label>
-                                {{form.user_email}}
-                            </div>
-                           
-                            <div>
-                                <label for="password">Password:</label>
-                                {{form.user_password}}
-                            </div>
-
-                            <div>
-                                {{form.user_submit}}
-                            </div>
-                        </form>
-
-
-                        <h5 class="navbar-tab">ArticleLinks</h5>
-                        <h5 class="navbar-tab">About Us Links</h5>
+                        <img class="logo" src="/static/images/blogtest.jpg">
+                        <div class="navbar-tab">
+                        <p class="navbar-tab">Article</p>
+                        <p class="navbar-tab">Aboust Us</p>
+                        </div>
                     </div>
                     <div class="user-profile">
-
+                        <form class="link" method="POST" action="{{url_for('login')}}">
+                            <input type="image" id="user-tab-image" src="/static/images/sign_in_icon.png" name="userButton">
+                        </form>
                     </div>
                 </div>
                 <div class="update_bar">
@@ -46,14 +29,51 @@
                         <li><h5>Game1</h5><p>Score</p></li>
                     </ul>
                 </div>
-                <div class="search-signup">
-                    <form class="link" method="POST" action="{{url_for('login')}}">
-                        <button class="navbar">Dashboard</button>
-                    </form>
-                </div>
             </div>
 
-            <div class="middle1_container"></div>
+            <div class="middle1_container">
+                <div id="main-article">
+                    <div class="title">
+                        <h3 id="main-article-title">How the Rams Bought a Super Bowl, and reinvested their winnings into a rebuild.</h3>
+                    </div>
+                    <div id="main-article-author">
+                        <h5>Sam Liftin</h5>
+                    </div>
+                    <div id="main-article-content">
+                        <p>The NFL is changing and more than ever as we see the need for team’s to develop
+                            their homegrown talent and ensure they make the right picks in the draft. While
+                            this has always been the case, with defensive schemes improving each year,
+                            having an elite quarterback does not guarantee success as it once did. In today’s
+                            NFL having elite players on rookie deals is the only real way to constantly
+                            compete for championships. This is most evident when looking at the
+                            Philadelphia Eagles who won Super Bowl 59 due to having talent on rookie deals
+                            such as Jalen Carter, Nokibe Dean, Cooper Dejean, and Quinton Mitchell. The
+                            Eagles do pay their star players but Howie Roseman has gained a reputation as
+                            one of the best General Managers in the NFL because of the roster he built. The
+                            Eagles also have retained many players whom they drafted, establishing most of
+                            the roster from the draft. However, this process is too long for some teams so
+                            they attempt to buy a championship and the most recent case of this would be the
+                            Long Angeles Rams. The Rams victory in Super Bowl 56 against the Cincinnati
+                            Bengals was notably notably traded for Matthew Stafford, Odel Beckham Jr, and
+                            Von Miller; all crucial factors in the team’s super bowl journey. While the super
+                            team strategy worked for the Rams in 2022, the following season they struggled
+                            greatly, and their lack of first round draft picks in the previous season hurt them
+                            greatly. They had an awful year in 2023, due to injuries, and lack of contribution
+                            from young players. However, after that horrendous season the Rams managed to
+                            make the playoffs back to back seasons the following year. While Coach Sean
+                            MccVay, and Quarterback Matthew Stafford, deserve the majority of the credit for
+                            the past two seasons, a large amount of credit is due to the young players that
+                            stepped up for the Rams. Most notably Puka Nuka, and Kyren Williams who have
+                            helped completely revamp the Rams offense. Keep in mind these guys were not
+                            taken high on the draft board. Both players were taken in the 5th round, Kyren in
+                            the 2022 draft, and Puka in the 2023 draft. On the defensive side, picks such as
+                            DT Kobie Turner, and DROTY Jarved Verse transformed the defense. The Rams
+                            currently have the youngest, and least expensive defense so the future is very
+                            bright. While Hall of Fame Quarterback Matthew Stafford could find a new home
+                            this offseason, the Rams without a doubt have completed one of the fastest</p>
+                    </div>
+                </div>
+            </div>
             </div>
             <div class="middle_2container">
             </div>

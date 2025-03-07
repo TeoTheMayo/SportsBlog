@@ -28,12 +28,12 @@ class SignIns(db.Model):
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    form = SignInForms()
-    return render_template("dashboard.html", form=form)
+    return render_template("dashboard.html")
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    form = SignInForms()
+    return render_template("login.html", form=form)
 
 @app.route('/submit', methods=["GET", "POST"])
 def submit():
@@ -53,3 +53,7 @@ def submit():
         return redirect(url_for('index'))  # Redirect to the index page after successful login
 
     return render_template("dashboard.html", form=form)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

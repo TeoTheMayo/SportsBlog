@@ -6,6 +6,22 @@
         <div class="login-background" stly="color: red;">
             <div class="login-popup">
                 <h3>Login</h3>
+                <form class = "link" method="POST" action="/submit">
+                    {{form.csrf_token}}
+                    <div>
+                        <label for="user_email">Email Address:</label>
+                        {{form.user_email}}
+                    </div>
+                   
+                    <div>
+                        <label for="password">Password:</label>
+                        {{form.user_password}}
+                    </div>
+
+                    <div>
+                        {{form.user_submit}}
+                    </div>
+                </form>
             </div>
         </div>
     </body>
