@@ -1,0 +1,51 @@
+* {
+    border: 1pt solid red;
+}
+
+html {
+    margin: auto;
+}
+
+body {
+    border: 1pt solid black;
+}
+
+.navbar-tab {
+    flex: 3;
+}
+
+.site_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.top_container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    border: 2pt dotted green;
+}
+
+.user-profile {
+    flex: 1;
+}
+
+img {
+    border: 1pt solid blue;
+    flex: .25;
+    max-width: 3em;
+    max-height: 3.5em;
+}
+
+.live-update {
+    display: flex;
+}
+
+.navbar-tab-container {
+    display: flex;
+}

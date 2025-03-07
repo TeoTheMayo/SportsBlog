@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title style="display: none;">Dashboard</title>
+        <link rel="stylesheet" href='/static/stylesheets/navigation.css'>
+    </head>
+    <body>
+        <div class="site-container">
+            <div class="top-container">
+                <div class="navbar">
+                    <img src="/static/images/blogtest.jpg">
+                    <div class="navbar-tab-container">
+                        
+                       
+
+                        <form class = "link" method="POST" action="/submit">
+                            {{form.csrf_token}}
+                            <div>
+                                <label for="user_email">Email Address:</label>
+                                {{form.user_email}}
+                            </div>
+                           
+                            <div>
+                                <label for="password">Password:</label>
+                                {{form.user_password}}
+                            </div>
+
+                            <div>
+                                {{form.user_submit}}
+                            </div>
+                        </form>
+
+
+                        <h5 class="navbar-tab">ArticleLinks</h5>
+                        <h5 class="navbar-tab">About Us Links</h5>
+                    </div>
+                    <div class="user-profile">
+
+                    </div>
+                </div>
+                <div class="update_bar">
+                    <img scr="/static/images/search.png">
+                    <ul class="live-update">
+                        <li><h5>Game1</h5><p>Score</p></li>
+                        <li><h5>Game1</h5><p>Score</p></li>
+                        <li><h5>Game1</h5><p>Score</p></li>
+                        <li><h5>Game1</h5><p>Score</p></li>
+                    </ul>
+                </div>
+                <div class="search-signup">
+                    <form class="link" method="POST" action="{{url_for('login')}}">
+                        <button class="navbar">Dashboard</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="middle1_container"></div>
+            </div>
+            <div class="middle_2container">
+            </div>
+            <div class="bottom_container">
+        </div>
+    </body>
+</html>
