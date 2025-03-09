@@ -35,6 +35,10 @@ def login():
     form = SignInForms()
     return render_template("login.html", form=form)
 
+@app.route('/singup', methods=["GET", "POST"])
+def signup():
+    return render_template("singup.html")
+
 @app.route('/submit', methods=["GET", "POST"])
 def submit():
     form = SignInForms()

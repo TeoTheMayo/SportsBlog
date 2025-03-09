@@ -1,0 +1,53 @@
+html * {
+    border: 1pt solid black;
+    margin: 0;
+}
+
+.login-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75%;
+}
+
+.submit-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.login-popup {
+    display: flex;
+    flex-direction: column;
+    max-width: 17.5em;
+}
+
+.login-popup *{
+    padding: .25em;
+    border-radius: 2pt;
+}
+
+.login-param {
+    display: flex;
+    justify-content: space-between;
+}
+
+form.link {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-labels {
+    font-size: 10px;
+    border: 0;
+    align-content: center;
+}
+
+.login-title {
+    display: flex;
+    justify-content: center;
+}
+
+.login-button {
+    display: flex;
+    justify-content: center;
+}
