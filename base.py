@@ -4,6 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from wtforms import StringField, BooleanField, RadioField, Form, SubmitField, TextAreaField, validators
 from wtforms.validators import DataRequired
 import configparser
+import bcrypt
+import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 config = configparser.ConfigParser()
 config.read('config.conf')
@@ -11,7 +14,7 @@ config.read('config.conf')
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config["DEFAULT"]["SECRET_KEY"]
 app.config["SQLALCHEMY_DATABASE_URI"] = config["DEFAULT"]["SQLALCHEMY_DATABASE_URI"]
-app.config["WIF_CSRF_ENABLED"] = True
+app.config["WTF_CSRF_ENABLED"] = True
 db = SQLAlchemy(app)
 
 class SignInForms(FlaskForm):
@@ -19,12 +22,24 @@ class SignInForms(FlaskForm):
     user_password = StringField('Password', validators=[DataRequired()])
     user_submit = SubmitField('Create Account')
 
-
 class SignIns(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(150), unique = True, nullable = False)
-    password = db.Column(db.String(150), nullable = False)
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(150), nullable=False)
 
+# Minimal database creation
+def ensure_db():
+    uri = config["DEFAULT"]["SQLALCHEMY_DATABASE_URI"]
+    db_name = uri.split('/')[-1]
+    conn = psycopg2.connect(dbname="postgres", user="your_db_user", password="your_db_password", host="localhost")
+    conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+    cur = conn.cursor()
+    cur.execute(f"SELECT 1 FROM pg_database WHERE datname = '{db_name}'")
+    if not cur.fetchone():
+        cur.execute(f"CREATE DATABASE {db_name}")
+        print(f"Database '{db_name}' created.")
+    cur.close()
+    conn.close()
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -40,24 +55,30 @@ def signup():
     return render_template("singup.html")
 
 @app.route('/submit', methods=["GET", "POST"])
-def submit():
+def signup_submit():
     form = SignInForms()
-    if form.validate_on_submit():
+    if request.method == "POST" and form.validate_on_submit():
         print("Form validated")
-        print(f"Email: {form.user_email.data}")
-        print(f"Password: {form.user_password.data}")
         email = form.user_email.data
-        password = form.user_password.data
+        password = form.user_password.data.encode('utf-8')
 
-        user_settings = SignIns(email=email, password=password)
-        db.session.add(user_settings)
-        db.session.commit()
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password, salt)
 
-
-        return redirect(url_for('index'))  # Redirect to the index page after successful login
+        user_settings = SignIns(
+            email=email,
+            password=hashed_password.decode('utf-8')
+        )
+        try:
+            db.session.add(user_settings)
+            db.session.commit()
+            return redirect(url_for('index'))
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error: {e}")
+            return render_template('signup.html', form=form, error="An error occurred during registration")
 
     return render_template("dashboard.html", form=form)
-
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Login/Signup</title>
+        <link rel="stylesheet" href="/static/stylesheets/login.css">
+    </head>
+    <body>
+        <div class="login-background" stly="color: red;">
+            <div class="login-popup">
+                <div class="login-title">
+                    <h3>Login</h3>
+                </div>
+                <form class = "link" method="POST" action="/submit">
+                    {{form.csrf_token}}
+                    <div class="login-param">
+                        <label class="login-labels" for="user_email">Email Address:</label>
+                        {{form.user_email}}
+                    </div>
+                   
+                    <div class="login-param">
+                        <label class="login-labels" for="password">Password:</label>
+                        {{form.user_password}}
+                    </div>
+                    <div class="submit-buttons">
+                        <div class="singup-button">
+                            {{form.user_submit}}
+                        </div>
+                    </div>
+                </form>
+                <div class="login-button">
+                    <form class="link" action="{{url_for('signup')}}">
+                        <input type="submit" name="userButton">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
